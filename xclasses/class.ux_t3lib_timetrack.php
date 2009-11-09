@@ -104,18 +104,18 @@ class ux_t3lib_timeTrack extends t3lib_timeTrack {
 		require(PATH_typo3conf.'localconf.php');
 		$conf = unserialize($TYPO3_CONF_VARS['EXT']['extConf']['tick']);
 		
-		// including pear classes
-		ini_set('include_path', t3lib_extMgm::extPath('tick').'lib/pear/' .PATH_SEPARATOR. ini_get('include_path'));
-				
 		// drawing the graph
 		require_once 'Image/Graph.php';
-		
+
+		/* @var Graph Image_Graph */
 		$Graph = Image_Graph::factory('graph', array(array('width' => $conf['svgWidth'], 'height' => $conf['svgHeight'], 'canvas' => 'svg')));
+
 		
+		/* @var $Font Image_Graph_Font */
 		$Font = $Graph->addNew('font', 'Verdana'); 
-		$Font->setSize(8);
-		$Graph->setFont($Font); 
-				
+		$Font->setSize(10);
+		$Graph->setFont($Font);
+
 		$Plotarea = $Graph->addNew('plotarea', array('Image_Graph_Axis'));
 		
 		$memoryDataset = Image_Graph::factory('dataset');
@@ -137,12 +137,15 @@ class ux_t3lib_timeTrack extends t3lib_timeTrack {
 			'4' => 'red@0.3' 		// sysLog: Fatal Error, devLog: -
 		);
 		
+		$dbOperationCount = array();
+		$dbOperationDuration = array();
+		
 		$internalStack = array();
 		
 		$thickness = 500;
 		
-		require_once t3lib_extMgm::extPath('tick').'classes/class.tx_tick_captionLine.php';
-		require_once t3lib_extMgm::extPath('tick').'classes/class.tx_tick_customMarker.php';
+		require_once PATH_typo3conf.'ext/tick/classes/class.tx_tick_captionLine.php';
+		require_once PATH_typo3conf.'ext/tick/classes/class.tx_tick_customMarker.php';
 		
 		// loop over collected data
 		foreach ($this->tick_logData as $key => $data) {
@@ -163,6 +166,10 @@ class ux_t3lib_timeTrack extends t3lib_timeTrack {
 					// get begin from stack
 					$beginData = array_pop($internalStack[$dbOperation]);
 					
+					// collect some statistics
+					$dbOperationCount[$dbOperation]++;
+					$dbOperationDuration[$dbOperation] += ($data[0]-$beginData[0]);
+										
 					$db[$key] = new tx_tick_customMarker();
 					$Plotarea->add($db[$key]);
 					$db[$key]->addVertex(array('X' => $beginData[0], 'Y' => $beginData[1]-$thickness));
@@ -227,15 +234,55 @@ class ux_t3lib_timeTrack extends t3lib_timeTrack {
 		
 		// formatting the axis
 		$yAxis = $Plotarea->getAxis(IMAGE_GRAPH_AXIS_Y);
-		$yAxis->setLabelInterval(1024);
+		$yAxis->setLabelInterval(2048);
 		$yAxis->setTitle('Memory usage [kb]', 'vertical');
-		
+
 		$xAxis = $Plotarea->getAxis(IMAGE_GRAPH_AXIS_X);
 		$xAxis->setTitle('Time [ms]');
 		
 		$yAxisSecond = $Plotarea->getAxis(IMAGE_GRAPH_AXIS_Y_SECONDARY);
-		$yAxisSecond ->setTitle('Stack level', 'vertical2');
-		$yAxisSecond ->forceMaximum(15);
+		$yAxisSecond->setTitle('Stack level', 'vertical2');
+		$yAxisSecond->forceMaximum(15);
+		
+		// add more information
+		/* @var $canvas Image_Canvas_SVG */
+		$canvas = $Graph->_getCanvas();
+		
+		$info = array(
+			sprintf('Max. memory usage: %s kb', $memoryDataset->maximumY()),
+			sprintf('Total duration: %s ms', $memoryDataset->maximumX())
+		);
+		$info[] = '';
+		$info[] = 'Database operations:';
+		foreach ($dbOperationCount as $dbOperation => $count) {
+			if ($count > 0) {
+				$info[] = sprintf('%sx %s: %s ms', $count, $dbOperation, $dbOperationDuration[$dbOperation]);
+ 			}
+		}
+		
+		$canvas->rectangle(array(
+			'x0' => 140,
+			'y0' => 40,
+			'x1' => 380,
+			'y1' => 10 + 50 + 15*count($info),
+			'fill' => '#EEEEEE',
+			'line' => 'gray'
+		));
+		
+		$y = 50;
+		foreach ($info as $entry) {
+			// font needs to be defined every time :(
+			$canvas->setFont(array(
+				'size' => 12,
+				'name' => 'Verdana'
+			));
+			$canvas->addText(array(
+				'x' => 150,
+	     		'y' => $y,
+	     		'text' => $entry
+			));	
+			$y += 15;
+		}
 		
 		$filename = str_replace('###TIMESTAMP###', time(), $conf['svgFilePath']);
 		

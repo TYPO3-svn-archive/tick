@@ -11,3 +11,6 @@ if (is_array($baseConfArr)) {
 	tx_tick_log::$minSysLogSeverity = $baseConfArr['minSysLogSeverity'];
 	tx_tick_log::$minDevLogSeverity = $baseConfArr['minDevLogSeverity'];
 }
+
+// including pear classes
+ini_set('include_path', PATH_typo3conf.'ext/tick/lib/pear/' .PATH_SEPARATOR. ini_get('include_path'));
