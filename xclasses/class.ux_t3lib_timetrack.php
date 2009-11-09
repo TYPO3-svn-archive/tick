@@ -139,7 +139,7 @@ class ux_t3lib_timeTrack extends t3lib_timeTrack {
 		
 		$internalStack = array();
 		
-		$thickness = 200;
+		$thickness = 500;
 		
 		require_once t3lib_extMgm::extPath('tick').'classes/class.tx_tick_captionLine.php';
 		require_once t3lib_extMgm::extPath('tick').'classes/class.tx_tick_customMarker.php';
@@ -178,10 +178,11 @@ class ux_t3lib_timeTrack extends t3lib_timeTrack {
 			if (!empty($data[2]) && empty($data[4])) {
 				$myCaptionLine[$key] = new tx_tick_captionLine();
 				$Plotarea->add($myCaptionLine[$key], IMAGE_GRAPH_AXIS_X);
-				$color = array_key_exists($data[5], $messageTypeColors) ? $messageTypeColors[$data[5]] : $messageTypeColors_default;
-				$myCaptionLine[$key]->setLineColor($color);
 				$myCaptionLine[$key]->setValue($data[0]);
 				$myCaptionLine[$key]->setMarkerTitle($data[2]);
+				$myCaptionLine[$key]->setLineStyle($MarkerLineStyle);
+				$color = array_key_exists($data[5], $messageTypeColors) ? $messageTypeColors[$data[5]] : $messageTypeColors_default;
+				$myCaptionLine[$key]->setLineColor($color);
 			}
 		}
 		
@@ -189,6 +190,12 @@ class ux_t3lib_timeTrack extends t3lib_timeTrack {
 		
 		$height = 1;
 		
+		// adding tslog stack trace
+		
+		/* @var $Fill Image_Graph_Fill_Gradient */
+		$Fill = Image_Graph::factory('gradient', array(IMAGE_GRAPH_GRAD_HORIZONTAL, 'green@0.2', 'green@0.5'));
+		$StackLineStyle = Image_Graph::factory('Image_Graph_Line_Solid', array('green@0.9'));
+		$StackLineStyle->setThickness(0.1);
 		foreach($tsStackLogCopy as $uniqueId => $data) {
 			$tsStackLogCopy[$uniqueId]['endtime'] = $this->convertMicrotime($tsStackLogCopy[$uniqueId]['endtime'])-$this->starttime;
 			$tsStackLogCopy[$uniqueId]['starttime'] = $this->convertMicrotime($tsStackLogCopy[$uniqueId]['starttime'])-$this->starttime;
@@ -203,13 +210,20 @@ class ux_t3lib_timeTrack extends t3lib_timeTrack {
 			$stack[$uniqueId]->addVertex(array('X' => $tsStackLogCopy[$uniqueId]['endtime'], 'Y' => $tsStackLogCopy[$uniqueId]['level'] * $height));
 			$stack[$uniqueId]->addVertex(array('X' => $tsStackLogCopy[$uniqueId]['endtime'], 'Y' => ($tsStackLogCopy[$uniqueId]['level']-1) * $height));
 			$stack[$uniqueId]->setMarkerTitle($tsStackLogCopy[$uniqueId]['key'] .' ('.$tsStackLogCopy[$uniqueId]['deltatime'] . 'ms)');
-			$stack[$uniqueId]->setFillColor('lightblue@'. (0.3 + 0.2*$tsStackLogCopy[$uniqueId]['level']));
-			$stack[$uniqueId]->setLineColor('lightblue');
+			//$stack[$uniqueId]->setFillColor('lightblue@'. (0.3 + 0.2*$tsStackLogCopy[$uniqueId]['level']));
+			$stack[$uniqueId]->setLineStyle($StackLineStyle);
+			$stack[$uniqueId]->setFillStyle($Fill);
 		}
 			
 		// setting up the lines
+		
+		
+		
+		/* @var $memory Image_Graph_Plot_Line */
 		$memory = $Plotarea->addNew('line', array($memoryDataset), IMAGE_GRAPH_AXIS_Y);
-		$memory->setLineColor('blue');
+		$LineStyle = Image_Graph::factory('Image_Graph_Line_Solid', array('blue'));
+		$LineStyle->setThickness(1.5);
+		$memory->setLineStyle($LineStyle);
 		
 		// formatting the axis
 		$yAxis = $Plotarea->getAxis(IMAGE_GRAPH_AXIS_Y);
