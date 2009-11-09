@@ -1,0 +1,497 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN"
+	 "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg width="1200" height="600" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+        <clipPath id="clipping_78">
+            <path d="M59 10 H1157 V560 H59 Z"/>
+        </clipPath>
+    </defs>
+    <g id="image_graph_plotarea">
+        <rect x="59" y="10" width="1098" height="550" style="fill:none;"/>
+        <g id="tx_tick_captionline">
+            <line x1="59" y1="10" x2="59" y2="560" style="stroke-width:1;stroke:rgb(0,0,0);stroke-opacity:0.3;fill:none;"  title="Hallo"/>
+        </g>
+        <g id="tx_tick_captionline1">
+            <line x1="59" y1="10" x2="59" y2="560" style="stroke-width:1;stroke:rgb(0,0,0);stroke-opacity:0.3;fill:none;"  title="Include class t3lib_db, t3lib_div, t3lib_extmgm"/>
+        </g>
+        <g id="tx_tick_captionline2">
+            <line x1="155" y1="10" x2="155" y2="560" style="stroke-width:1;stroke:rgb(0,0,0);stroke-opacity:0.3;fill:none;"  title="Hallo"/>
+        </g>
+        <g id="tx_tick_captionline3">
+            <line x1="155" y1="10" x2="155" y2="560" style="stroke-width:1;stroke:rgb(0,0,0);stroke-opacity:0.3;fill:none;"  title="Include config files"/>
+        </g>
+        <g id="tx_tick_captionline4">
+            <line x1="168" y1="10" x2="168" y2="560" style="stroke-width:1;stroke:rgb(0,0,0);stroke-opacity:0.3;fill:none;"  title="Hallo"/>
+        </g>
+        <g id="tx_tick_captionline5">
+            <line x1="168" y1="10" x2="168" y2="560" style="stroke-width:1;stroke:rgb(0,0,0);stroke-opacity:0.3;fill:none;"  title="Loading localconf.php extensions"/>
+        </g>
+        <g id="tx_tick_captionline6">
+            <line x1="216" y1="10" x2="216" y2="560" style="stroke-width:1;stroke:rgb(0,0,0);stroke-opacity:0.3;fill:none;"  title="Hallo"/>
+        </g>
+        <g id="tx_tick_captionline7">
+            <line x1="216" y1="10" x2="216" y2="560" style="stroke-width:1;stroke:rgb(0,0,0);stroke-opacity:0.3;fill:none;"  title="Include Frontend libraries"/>
+        </g>
+        <g id="tx_tick_captionline8">
+            <line x1="423" y1="10" x2="423" y2="560" style="stroke-width:1;stroke:rgb(0,0,0);stroke-opacity:0.3;fill:none;"  title="Hallo"/>
+        </g>
+        <g id="tx_tick_captionline9">
+            <line x1="423" y1="10" x2="423" y2="560" style="stroke-width:1;stroke:rgb(0,0,0);stroke-opacity:0.3;fill:none;"  title="Front End user initialized"/>
+        </g>
+        <g id="tx_tick_custommarker">
+            <path d="M 423,318 L 423,303 L 429,303 L 429,318 Z" style="fill:rgb(0,0,255);fill-opacity:0.5;"  title="SELECT COUNT(ses_id)
+			FROM fe_sessions
+			WHERE
+				ses_id='dcc4416c4f9d51cf2dfee2cf0bf6e38c'"/>
+        </g>
+        <g id="tx_tick_custommarker10">
+            <path d="M 429,318 L 429,303 L 429,303 L 429,318 Z" style="fill:rgb(0,0,255);fill-opacity:0.5;"  title="SELECT content
+			FROM fe_session_data
+			WHERE
+				hash='dcc4416c4f9d51cf2dfee2cf0bf6e38c'"/>
+        </g>
+        <g id="tx_tick_custommarker11">
+            <path d="M 581,318 L 581,303 L 587,302 L 587,318 Z" style="fill:rgb(0,0,255);fill-opacity:0.5;"  title="SELECT *
+			FROM fe_sessions,fe_users
+			WHERE
+				fe_sessions.ses_id = '7a0f3445140329391771394aff58b4e6'
+							AND fe_sessions.ses_name = 'fe_typo_user'
+							AND fe_sessions.ses_userid = fe_users.uid
+							AND (
+				fe_sessions.ses_iplock='192.168'
+				OR fe_sessions.ses_iplock='[DISABLED]'
+				)
+							AND fe_sessions.ses_hashlock=242694183
+							 AND fe_users.disable=0 AND fe_users.deleted=0 AND (fe_users.starttime&lt;=1257682498) AND (fe_users.endtime=0 OR fe_users.endtime&gt;1257682498)"/>
+        </g>
+        <g id="tx_tick_custommarker12">
+            <path d="M 587,318 L 587,302 L 587,302 L 587,318 Z" style="fill:rgb(255,0,0);fill-opacity:0.5;"  title="DELETE FROM fe_sessions
+				WHERE
+					ses_id = '7a0f3445140329391771394aff58b4e6'
+						AND ses_name = 'fe_typo_user'"/>
+        </g>
+        <g id="tx_tick_custommarker13">
+            <path d="M 587,318 L 587,302 L 587,302 L 587,318 Z" style="fill:rgb(0,0,255);fill-opacity:0.5;"  title="SELECT *
+			FROM fe_sessions,fe_users
+			WHERE
+				fe_sessions.ses_id = '7a0f3445140329391771394aff58b4e6'
+							AND fe_sessions.ses_name = 'fe_typo_user'
+							AND fe_sessions.ses_userid = fe_users.uid
+							AND (
+				fe_sessions.ses_iplock='192.168'
+				OR fe_sessions.ses_iplock='[DISABLED]'
+				)
+							AND fe_sessions.ses_hashlock=242694183
+							 AND fe_users.disable=0 AND fe_users.deleted=0 AND (fe_users.starttime&lt;=1257682498) AND (fe_users.endtime=0 OR fe_users.endtime&gt;1257682498)"/>
+        </g>
+        <g id="tx_tick_custommarker14">
+            <path d="M 587,318 L 587,302 L 594,302 L 594,318 Z" style="fill:rgb(255,0,0);fill-opacity:0.5;"  title="DELETE FROM fe_sessions
+				WHERE
+					ses_id = '7a0f3445140329391771394aff58b4e6'
+						AND ses_name = 'fe_typo_user'"/>
+        </g>
+        <g id="tx_tick_custommarker15">
+            <path d="M 594,317 L 594,302 L 594,302 L 594,317 Z" style="fill:rgb(0,0,255);fill-opacity:0.5;"  title="SELECT *
+			FROM fe_session_data
+			WHERE
+				hash='7a0f3445140329391771394aff58b4e6'"/>
+        </g>
+        <g id="tx_tick_captionline16">
+            <line x1="594" y1="10" x2="594" y2="560" style="stroke-width:1;stroke:rgb(0,0,0);stroke-opacity:0.3;fill:none;"  title="Hallo"/>
+        </g>
+        <g id="tx_tick_captionline17">
+            <line x1="594" y1="10" x2="594" y2="560" style="stroke-width:1;stroke:rgb(0,0,0);stroke-opacity:0.3;fill:none;"  title="Back End user initialized"/>
+        </g>
+        <g id="tx_tick_custommarker18">
+            <path d="M 1061,33 L 1061,18 L 1061,18 L 1061,33 Z" style="fill:rgb(0,0,255);fill-opacity:0.5;"  title="SELECT COUNT(ses_id)
+			FROM be_sessions
+			WHERE
+				ses_id='6e12d9897b2a0230e21d34212fada911'"/>
+        </g>
+        <g id="tx_tick_custommarker19">
+            <path d="M 1068,33 L 1068,17 L 1068,17 L 1068,33 Z" style="fill:rgb(0,0,255);fill-opacity:0.5;"  title="SELECT *
+			FROM be_sessions,be_users
+			WHERE
+				be_sessions.ses_id = '6e12d9897b2a0230e21d34212fada911'
+							AND be_sessions.ses_name = 'be_typo_user'
+							AND be_sessions.ses_userid = be_users.uid
+							AND (
+				be_sessions.ses_iplock='192.168.178.26'
+				OR be_sessions.ses_iplock='[DISABLED]'
+				)
+							AND be_sessions.ses_hashlock=242694183
+							AND be_users.pid=0  AND be_users.disable=0 AND be_users.deleted=0 AND (be_users.starttime&lt;=1257682498) AND (be_users.endtime=0 OR be_users.endtime&gt;1257682498)"/>
+        </g>
+        <g id="tx_tick_custommarker20">
+            <path d="M 1068,32 L 1068,17 L 1075,17 L 1075,32 Z" style="fill:rgb(144,238,144);fill-opacity:0.5;"  title="UPDATE be_sessions
+					SET
+						ses_tstamp='1257682498'
+					WHERE
+						ses_id='6e12d9897b2a0230e21d34212fada911'
+												AND ses_name='be_typo_user'"/>
+        </g>
+        <g id="tx_tick_custommarker21">
+            <path d="M 1075,33 L 1075,17 L 1075,17 L 1075,33 Z" style="fill:rgb(0,0,255);fill-opacity:0.5;"  title="SELECT *
+			FROM be_sessions,be_users
+			WHERE
+				be_sessions.ses_id = '6e12d9897b2a0230e21d34212fada911'
+							AND be_sessions.ses_name = 'be_typo_user'
+							AND be_sessions.ses_userid = be_users.uid
+							AND (
+				be_sessions.ses_iplock='192.168.178.26'
+				OR be_sessions.ses_iplock='[DISABLED]'
+				)
+							AND be_sessions.ses_hashlock=242694183
+							AND be_users.pid=0  AND be_users.disable=0 AND be_users.deleted=0 AND (be_users.starttime&lt;=1257682498) AND (be_users.endtime=0 OR be_users.endtime&gt;1257682498)"/>
+        </g>
+        <g id="tx_tick_custommarker22">
+            <path d="M 1075,32 L 1075,17 L 1075,17 L 1075,32 Z" style="fill:rgb(144,238,144);fill-opacity:0.5;"  title="UPDATE be_sessions
+					SET
+						ses_tstamp='1257682498'
+					WHERE
+						ses_id='6e12d9897b2a0230e21d34212fada911'
+												AND ses_name='be_typo_user'"/>
+        </g>
+        <g id="tx_tick_custommarker23">
+            <path d="M 1089,31 L 1089,16 L 1089,15 L 1089,31 Z" style="fill:rgb(0,0,255);fill-opacity:0.5;"  title="SELECT content
+			FROM cache_hash
+			WHERE
+				hash='23ec77db4fbd67b18e8820a1cdd3e5ad'"/>
+        </g>
+        <g id="tx_tick_custommarker24">
+            <path d="M 1089,31 L 1089,15 L 1089,15 L 1089,30 Z" style="fill:rgb(0,0,255);fill-opacity:0.5;"  title="SELECT uid
+			FROM pages
+			WHERE
+				deleted=0 AND uid IN (0) AND  1=1"/>
+        </g>
+        <g id="tx_tick_captionline25">
+            <line x1="1096" y1="10" x2="1096" y2="560" style="stroke-width:1;stroke:rgb(0,0,0);stroke-opacity:0.3;fill:none;"  title="Hallo"/>
+        </g>
+        <g id="tx_tick_captionline26">
+            <line x1="1096" y1="10" x2="1096" y2="560" style="stroke-width:1;stroke:rgb(0,0,0);stroke-opacity:0.3;fill:none;"  title="Process ID"/>
+        </g>
+        <g id="tx_tick_captionline27">
+            <line x1="1096" y1="10" x2="1096" y2="560" style="stroke-width:1;stroke:rgb(0,0,0);stroke-opacity:0.3;fill:none;"  title="Hallo"/>
+        </g>
+        <g id="tx_tick_captionline28">
+            <line x1="1096" y1="10" x2="1096" y2="560" style="stroke-width:1;stroke:rgb(0,0,0);stroke-opacity:0.3;fill:none;"  title="beUserLogin"/>
+        </g>
+        <g id="tx_tick_captionline29">
+            <line x1="1096" y1="10" x2="1096" y2="560" style="stroke-width:1;stroke:rgb(0,0,0);stroke-opacity:0.3;fill:none;"  title="Hallo"/>
+        </g>
+        <g id="tx_tick_captionline30">
+            <line x1="1096" y1="10" x2="1096" y2="560" style="stroke-width:1;stroke:rgb(0,0,0);stroke-opacity:0.3;fill:none;"  title="fetch_the_id initialize/"/>
+        </g>
+        <g id="tx_tick_captionline31">
+            <line x1="1109" y1="10" x2="1109" y2="560" style="stroke-width:1;stroke:rgb(0,0,0);stroke-opacity:0.3;fill:none;"  title="Hallo"/>
+        </g>
+        <g id="tx_tick_captionline32">
+            <line x1="1109" y1="10" x2="1109" y2="560" style="stroke-width:1;stroke:rgb(0,0,0);stroke-opacity:0.3;fill:none;"  title="fetch_the_id domain/"/>
+        </g>
+        <g id="tx_tick_custommarker33">
+            <path d="M 1109,26 L 1109,11 L 1116,11 L 1116,26 Z" style="fill:rgb(0,0,255);fill-opacity:0.5;"  title="SELECT pages.uid,sys_domain.redirectTo,sys_domain.prepend_params
+			FROM pages,sys_domain
+			WHERE
+				pages.uid=sys_domain.pid
+						AND sys_domain.hidden=0
+						AND (sys_domain.domainName='local.4.2-playground' OR sys_domain.domainName='local.4.2-playground/')  AND pages.deleted=0 AND pages.hidden=0 AND (pages.starttime&lt;=1257682440) AND (pages.endtime=0 OR pages.endtime&gt;1257682440)  AND NOT (pages.t3ver_state&gt;0) AND pages.doktype&lt;200 AND (pages.fe_group='' OR pages.fe_group IS NULL OR pages.fe_group='0' OR (pages.fe_group LIKE '%,0,%' OR pages.fe_group LIKE '0,%' OR pages.fe_group LIKE '%,0' OR pages.fe_group='0') OR (pages.fe_group LIKE '%,-1,%' OR pages.fe_group LIKE '-1,%' OR pages.fe_group LIKE '%,-1' OR pages.fe_group='-1'))
+			LIMIT 1"/>
+        </g>
+        <g id="tx_tick_custommarker34">
+            <path d="M 1116,26 L 1116,11 L 1116,11 L 1116,26 Z" style="fill:rgb(0,0,255);fill-opacity:0.5;"  title="SELECT *
+			FROM pages
+			WHERE
+				pid=0 AND pages.deleted=0 AND pages.hidden=0 AND (pages.starttime&lt;=1257682440) AND (pages.endtime=0 OR pages.endtime&gt;1257682440)  AND NOT (pages.t3ver_state&gt;0) AND pages.doktype&lt;200 AND (pages.fe_group='' OR pages.fe_group IS NULL OR pages.fe_group='0' OR (pages.fe_group LIKE '%,0,%' OR pages.fe_group LIKE '0,%' OR pages.fe_group LIKE '%,0' OR pages.fe_group='0') OR (pages.fe_group LIKE '%,-1,%' OR pages.fe_group LIKE '-1,%' OR pages.fe_group LIKE '%,-1' OR pages.fe_group='-1'))
+			ORDER BY sorting
+			LIMIT 1"/>
+        </g>
+        <g id="tx_tick_captionline35">
+            <line x1="1116" y1="10" x2="1116" y2="560" style="stroke-width:1;stroke:rgb(0,0,0);stroke-opacity:0.3;fill:none;"  title="Hallo"/>
+        </g>
+        <g id="tx_tick_captionline36">
+            <line x1="1116" y1="10" x2="1116" y2="560" style="stroke-width:1;stroke:rgb(0,0,0);stroke-opacity:0.3;fill:none;"  title="fetch_the_id rootLine/"/>
+        </g>
+        <g id="tx_tick_custommarker37">
+            <path d="M 1116,25 L 1116,10 L 1123,10 L 1123,25 Z" style="fill:rgb(0,0,255);fill-opacity:0.5;"  title="SELECT *
+			FROM pages
+			WHERE
+				uid=1 AND pages.deleted=0 AND pages.hidden=0 AND (pages.starttime&lt;=1257682440) AND (pages.endtime=0 OR pages.endtime&gt;1257682440)  AND NOT (pages.t3ver_state&gt;0) AND pages.doktype&lt;200 AND (pages.fe_group='' OR pages.fe_group IS NULL OR pages.fe_group='0' OR (pages.fe_group LIKE '%,0,%' OR pages.fe_group LIKE '0,%' OR pages.fe_group LIKE '%,0' OR pages.fe_group='0') OR (pages.fe_group LIKE '%,-1,%' OR pages.fe_group LIKE '-1,%' OR pages.fe_group LIKE '%,-1' OR pages.fe_group='-1'))"/>
+        </g>
+        <g id="tx_tick_custommarker38">
+            <path d="M 1123,25 L 1123,10 L 1123,10 L 1123,25 Z" style="fill:rgb(0,0,255);fill-opacity:0.5;"  title="SELECT pid,uid,t3ver_oid,t3ver_wsid,t3ver_state,t3ver_swapmode,title,alias,nav_title,media,layout,hidden,starttime,endtime,fe_group,extendToSubpages,doktype,TSconfig,storage_pid,is_siteroot,mount_pid,mount_pid_ol,fe_login_mode
+			FROM pages
+			WHERE
+				uid=1 AND pages.deleted=0 AND pages.doktype!=255"/>
+        </g>
+        <g id="tx_tick_captionline39">
+            <line x1="1137" y1="10" x2="1137" y2="560" style="stroke-width:1;stroke:rgb(0,0,0);stroke-opacity:0.3;fill:none;"  title="Hallo"/>
+        </g>
+        <g id="tx_tick_captionline40">
+            <line x1="1137" y1="10" x2="1137" y2="560" style="stroke-width:1;stroke:rgb(0,0,0);stroke-opacity:0.3;fill:none;"  title="Get Compressed TC array"/>
+        </g>
+        <g id="tx_tick_custommarker41">
+            <path d="M 1144,20 L 1144,10 L 1144,10 L 1144,20 Z" style="fill:rgb(0,0,255);fill-opacity:0.5;"  title="SELECT content
+			FROM cache_hash
+			WHERE
+				hash='a0441eabb7f2bed1ced68c3d8454ea2d'"/>
+        </g>
+        <g id="tx_tick_captionline42">
+            <line x1="1144" y1="10" x2="1144" y2="560" style="stroke-width:1;stroke:rgb(0,0,0);stroke-opacity:0.3;fill:none;"  title="Hallo"/>
+        </g>
+        <g id="tx_tick_captionline43">
+            <line x1="1144" y1="10" x2="1144" y2="560" style="stroke-width:1;stroke:rgb(0,0,0);stroke-opacity:0.3;fill:none;"  title="Start Template"/>
+        </g>
+        <g id="tx_tick_captionline44">
+            <line x1="1144" y1="10" x2="1144" y2="560" style="stroke-width:1;stroke:rgb(0,0,0);stroke-opacity:0.3;fill:none;"  title="Hallo"/>
+        </g>
+        <g id="tx_tick_captionline45">
+            <line x1="1144" y1="10" x2="1144" y2="560" style="stroke-width:1;stroke:rgb(0,0,0);stroke-opacity:0.3;fill:none;"  title="Get Page from cache"/>
+        </g>
+        <g id="tx_tick_custommarker46">
+            <path d="M 1144,18 L 1144,10 L 1144,10 L 1144,18 Z" style="fill:rgb(0,0,255);fill-opacity:0.5;"  title="SELECT content
+			FROM cache_pagesection
+			WHERE
+				page_id=1 AND mpvar_hash=222419149"/>
+        </g>
+        <g id="tx_tick_captionline47">
+            <line x1="1151" y1="10" x2="1151" y2="560" style="stroke-width:1;stroke:rgb(0,0,0);stroke-opacity:0.3;fill:none;"  title="Hallo"/>
+        </g>
+        <g id="tx_tick_captionline48">
+            <line x1="1151" y1="10" x2="1151" y2="560" style="stroke-width:1;stroke:rgb(0,0,0);stroke-opacity:0.3;fill:none;"  title="Cache Row"/>
+        </g>
+        <g id="tx_tick_captionline49">
+            <line x1="1151" y1="10" x2="1151" y2="560" style="stroke-width:1;stroke:rgb(0,0,0);stroke-opacity:0.3;fill:none;"  title="Hallo"/>
+        </g>
+        <g id="tx_tick_captionline50">
+            <line x1="1151" y1="10" x2="1151" y2="560" style="stroke-width:1;stroke:rgb(0,0,0);stroke-opacity:0.3;fill:none;"  title="Cache Query"/>
+        </g>
+        <g id="tx_tick_custommarker51">
+            <path d="M 1151,17 L 1151,10 L 1151,10 L 1151,17 Z" style="fill:rgb(0,0,255);fill-opacity:0.5;"  title="SELECT S.*
+			FROM cache_pages S,pages P
+			WHERE
+				S.hash='0e6cefb4a0f508e5fc2a2f750b7a3d47'
+					AND S.page_id=P.uid
+					AND S.expires &gt; 1257682498
+					AND P.deleted=0
+					AND P.hidden=0
+					AND P.starttime&lt;=1257682498
+					AND (P.endtime=0 OR P.endtime&gt;1257682498)"/>
+        </g>
+        <g id="tx_tick_captionline52">
+            <line x1="1157" y1="10" x2="1157" y2="560" style="stroke-width:1;stroke:rgb(0,0,0);stroke-opacity:0.3;fill:none;"  title="Hallo"/>
+        </g>
+        <g id="tx_tick_captionline53">
+            <line x1="1157" y1="10" x2="1157" y2="560" style="stroke-width:1;stroke:rgb(0,0,0);stroke-opacity:0.3;fill:none;"  title="Page generation"/>
+        </g>
+        <g id="tx_tick_captionline54">
+            <line x1="1157" y1="10" x2="1157" y2="560" style="stroke-width:1;stroke:rgb(0,0,0);stroke-opacity:0.3;fill:none;"  title="Hallo"/>
+        </g>
+        <g id="tx_tick_captionline55">
+            <line x1="1157" y1="10" x2="1157" y2="560" style="stroke-width:1;stroke:rgb(0,0,0);stroke-opacity:0.3;fill:none;"  title="Print Content"/>
+        </g>
+        <g id="tx_tick_captionline56">
+            <line x1="1157" y1="10" x2="1157" y2="560" style="stroke-width:1;stroke:rgb(0,0,0);stroke-opacity:0.3;fill:none;"  title="Hallo"/>
+        </g>
+        <g id="tx_tick_captionline57">
+            <line x1="1157" y1="10" x2="1157" y2="560" style="stroke-width:1;stroke:rgb(0,0,0);stroke-opacity:0.3;fill:none;"  title="Stat"/>
+        </g>
+        <g id="tx_tick_custommarker58">
+            <path d="M 59,560 L 59,523 L 1157,523 L 1157,560 Z" style="stroke-width:1;stroke:rgb(173,216,230);fill:rgb(173,216,230);fill-opacity:0.5;"  title=" (160ms)"/>
+        </g>
+        <g id="tx_tick_custommarker59">
+            <path d="M 59,523 L 59,486 L 155,486 L 155,523 Z" style="stroke-width:1;stroke:rgb(173,216,230);fill:rgb(173,216,230);fill-opacity:0.7;"  title="/Include class t3lib_db, t3lib_div, t3lib_extmgm (14ms)"/>
+        </g>
+        <g id="tx_tick_custommarker60">
+            <path d="M 155,523 L 155,486 L 216,486 L 216,523 Z" style="stroke-width:1;stroke:rgb(173,216,230);fill:rgb(173,216,230);fill-opacity:0.7;"  title="/Include config files (9ms)"/>
+        </g>
+        <g id="tx_tick_custommarker61">
+            <path d="M 168,486 L 168,449 L 196,449 L 196,486 Z" style="stroke-width:1;stroke:rgb(173,216,230);fill:rgb(173,216,230);fill-opacity:0.9;"  title="/Include config files/Loading localconf.php extensions (4ms)"/>
+        </g>
+        <g id="tx_tick_custommarker62">
+            <path d="M 216,523 L 216,486 L 416,486 L 416,523 Z" style="stroke-width:1;stroke:rgb(173,216,230);fill:rgb(173,216,230);fill-opacity:0.7;"  title="/Include Frontend libraries (29ms)"/>
+        </g>
+        <g id="tx_tick_custommarker63">
+            <path d="M 423,523 L 423,486 L 594,486 L 594,523 Z" style="stroke-width:1;stroke:rgb(173,216,230);fill:rgb(173,216,230);fill-opacity:0.7;"  title="/Front End user initialized (25ms)"/>
+        </g>
+        <g id="tx_tick_custommarker64">
+            <path d="M 594,523 L 594,486 L 1096,486 L 1096,523 Z" style="stroke-width:1;stroke:rgb(173,216,230);fill:rgb(173,216,230);fill-opacity:0.7;"  title="/Back End user initialized (73ms)"/>
+        </g>
+        <g id="tx_tick_custommarker65">
+            <path d="M 1096,523 L 1096,486 L 1130,486 L 1130,523 Z" style="stroke-width:1;stroke:rgb(173,216,230);fill:rgb(173,216,230);fill-opacity:0.7;"  title="/Process ID (5ms)"/>
+        </g>
+        <g id="tx_tick_custommarker66">
+            <path d="M 1096,486 L 1096,449 L 1096,449 L 1096,486 Z" style="stroke-width:1;stroke:rgb(173,216,230);fill:rgb(173,216,230);fill-opacity:0.9;"  title="/Process ID/beUserLogin (0ms)"/>
+        </g>
+        <g id="tx_tick_custommarker67">
+            <path d="M 1096,486 L 1096,449 L 1109,449 L 1109,486 Z" style="stroke-width:1;stroke:rgb(173,216,230);fill:rgb(173,216,230);fill-opacity:0.9;"  title="/Process ID/fetch_the_id initialize/ (2ms)"/>
+        </g>
+        <g id="tx_tick_custommarker68">
+            <path d="M 1109,486 L 1109,449 L 1116,449 L 1116,486 Z" style="stroke-width:1;stroke:rgb(173,216,230);fill:rgb(173,216,230);fill-opacity:0.9;"  title="/Process ID/fetch_the_id domain/ (1ms)"/>
+        </g>
+        <g id="tx_tick_custommarker69">
+            <path d="M 1116,486 L 1116,449 L 1130,449 L 1130,486 Z" style="stroke-width:1;stroke:rgb(173,216,230);fill:rgb(173,216,230);fill-opacity:0.9;"  title="/Process ID/fetch_the_id rootLine/ (2ms)"/>
+        </g>
+        <g id="tx_tick_custommarker70">
+            <path d="M 1137,523 L 1137,486 L 1144,486 L 1144,523 Z" style="stroke-width:1;stroke:rgb(173,216,230);fill:rgb(173,216,230);fill-opacity:0.7;"  title="/Get Compressed TC array (1ms)"/>
+        </g>
+        <g id="tx_tick_custommarker71">
+            <path d="M 1144,523 L 1144,486 L 1144,486 L 1144,523 Z" style="stroke-width:1;stroke:rgb(173,216,230);fill:rgb(173,216,230);fill-opacity:0.7;"  title="/Start Template (0ms)"/>
+        </g>
+        <g id="tx_tick_custommarker72">
+            <path d="M 1144,523 L 1144,486 L 1157,486 L 1157,523 Z" style="stroke-width:1;stroke:rgb(173,216,230);fill:rgb(173,216,230);fill-opacity:0.7;"  title="/Get Page from cache (2ms)"/>
+        </g>
+        <g id="tx_tick_custommarker73">
+            <path d="M 1151,486 L 1151,449 L 1157,449 L 1157,486 Z" style="stroke-width:1;stroke:rgb(173,216,230);fill:rgb(173,216,230);fill-opacity:0.9;"  title="/Get Page from cache/Cache Row (1ms)"/>
+        </g>
+        <g id="tx_tick_custommarker74">
+            <path d="M 1151,449 L 1151,413 L 1151,413 L 1151,449 Z" style="stroke-width:1;stroke:rgb(173,216,230);fill:rgb(173,216,230);"  title="/Get Page from cache/Cache Row/Cache Query (0ms)"/>
+        </g>
+        <g id="tx_tick_custommarker75">
+            <path d="M 1157,523 L 1157,486 L 1157,486 L 1157,523 Z" style="stroke-width:1;stroke:rgb(173,216,230);fill:rgb(173,216,230);fill-opacity:0.7;"  title="/Page generation (0ms)"/>
+        </g>
+        <g id="tx_tick_custommarker76">
+            <path d="M 1157,523 L 1157,486 L 1157,486 L 1157,523 Z" style="stroke-width:1;stroke:rgb(173,216,230);fill:rgb(173,216,230);fill-opacity:0.7;"  title="/Print Content (0ms)"/>
+        </g>
+        <g id="tx_tick_custommarker77">
+            <path d="M 1157,523 L 1157,486 L 1157,486 L 1157,523 Z" style="stroke-width:1;stroke:rgb(173,216,230);fill:rgb(173,216,230);fill-opacity:0.7;"  title="/Stat (0ms)"/>
+        </g>
+        <g id="image_graph_plot_line_line">
+            <g clip-path="url(#clipping_78)">
+            <path d="M 59,559 L 59,559 L 155,489 L 168,483 L 168,483 L 182,474 L 182,474 L 196,472 L 196,472 L 196,471 L 196,471 L 216,470 L 216,470 L 333,376 L 416,311 L 423,311 L 423,311 L 423,311 L 423,311 L 429,311 L 429,311 L 429,311 L 429,311 L 581,310 L 581,310 L 581,310 L 587,310 L 587,310 L 587,310 L 587,310 L 587,310 L 587,310 L 587,310 L 587,310 L 587,310 L 587,310 L 594,310 L 594,310 L 594,310 L 594,310 L 594,310 L 594,310 L 972,69 L 1061,25 L 1061,25 L 1061,25 L 1061,25 L 1061,25 L 1068,25 L 1068,25 L 1068,24 L 1068,24 L 1075,24 L 1075,25 L 1075,25 L 1075,25 L 1075,24 L 1075,24 L 1075,24 L 1082,24 L 1082,24 L 1082,23 L 1082,23 L 1082,23 L 1089,23 L 1089,23 L 1089,23 L 1089,23 L 1089,23 L 1089,23 L 1089,23 L 1089,23 L 1089,23 L 1096,23 L 1096,23 L 1096,23 L 1096,23 L 1096,22 L 1096,22 L 1096,22 L 1096,22 L 1109,19 L 1109,19 L 1109,19 L 1109,19 L 1109,19 L 1109,18 L 1116,18 L 1116,18 L 1116,18 L 1116,18 L 1116,18 L 1116,18 L 1116,18 L 1123,18 L 1123,17 L 1123,17 L 1123,17 L 1123,17 L 1123,17 L 1123,17 L 1130,17 L 1137,13 L 1137,12 L 1137,13 L 1137,13 L 1137,13 L 1144,13 L 1144,12 L 1144,12 L 1144,10 L 1144,10 L 1144,10 L 1144,10 L 1144,10 L 1151,10 L 1151,10 L 1151,10 L 1151,10 L 1151,10 L 1151,10 L 1157,10 L 1157,10 L 1157,10 L 1157,10 L 1157,10 L 1157,10" style="stroke-width:1;stroke:rgb(0,0,255);fill:none;"/>
+            </g>
+        </g>
+        <g id="image_graph_axis">
+            <line x1="59" y1="560" x2="1157" y2="560" style="stroke-width:1;stroke:rgb(0,0,0);fill:none;"/>
+            <g transform="translate(608, 589)">
+                <text x="0" y="0" style="font-family:Verdana;font-size:8px;fill:rgb(0,0,0);text-anchor:middle;">Time [ms]</text>
+            </g>
+            <g id="image_graph_axis_ticks">
+                <g transform="translate(230, 574)">
+                    <text x="0" y="0" style="font-family:Verdana;font-size:8px;fill:rgb(0,0,0);text-anchor:middle;">25</text>
+                </g>
+                <line x1="230" y1="562" x2="230" y2="558" style="stroke-width:1;stroke:rgb(0,0,0);fill:none;"/>
+                <g transform="translate(402, 574)">
+                    <text x="0" y="0" style="font-family:Verdana;font-size:8px;fill:rgb(0,0,0);text-anchor:middle;">50</text>
+                </g>
+                <line x1="402" y1="562" x2="402" y2="558" style="stroke-width:1;stroke:rgb(0,0,0);fill:none;"/>
+                <g transform="translate(574, 574)">
+                    <text x="0" y="0" style="font-family:Verdana;font-size:8px;fill:rgb(0,0,0);text-anchor:middle;">75</text>
+                </g>
+                <line x1="574" y1="562" x2="574" y2="558" style="stroke-width:1;stroke:rgb(0,0,0);fill:none;"/>
+                <g transform="translate(745, 574)">
+                    <text x="0" y="0" style="font-family:Verdana;font-size:8px;fill:rgb(0,0,0);text-anchor:middle;">100</text>
+                </g>
+                <line x1="745" y1="562" x2="745" y2="558" style="stroke-width:1;stroke:rgb(0,0,0);fill:none;"/>
+                <g transform="translate(917, 574)">
+                    <text x="0" y="0" style="font-family:Verdana;font-size:8px;fill:rgb(0,0,0);text-anchor:middle;">125</text>
+                </g>
+                <line x1="917" y1="562" x2="917" y2="558" style="stroke-width:1;stroke:rgb(0,0,0);fill:none;"/>
+                <g transform="translate(1089, 574)">
+                    <text x="0" y="0" style="font-family:Verdana;font-size:8px;fill:rgb(0,0,0);text-anchor:middle;">150</text>
+                </g>
+                <line x1="1089" y1="562" x2="1089" y2="558" style="stroke-width:1;stroke:rgb(0,0,0);fill:none;"/>
+            </g>
+        </g>
+        <g id="image_graph_axis79">
+            <line x1="59" y1="560" x2="59" y2="10" style="stroke-width:1;stroke:rgb(0,0,0);fill:none;"/>
+            <g transform="translate(10, 285)">
+                <text x="0" y="0" transform="rotate(270)" style="font-family:Verdana;font-size:8px;fill:rgb(0,0,0);text-anchor:middle;">Memory usage [kb]</text>
+            </g>
+            <g id="image_graph_axis_ticks80">
+                <g transform="translate(56, 524)">
+                    <text x="0" y="0" style="font-family:Verdana;font-size:8px;fill:rgb(0,0,0);text-anchor:end;">1024</text>
+                </g>
+                <line x1="57" y1="520" x2="61" y2="520" style="stroke-width:1;stroke:rgb(0,0,0);fill:none;"/>
+                <g transform="translate(56, 485)">
+                    <text x="0" y="0" style="font-family:Verdana;font-size:8px;fill:rgb(0,0,0);text-anchor:end;">2048</text>
+                </g>
+                <line x1="57" y1="481" x2="61" y2="481" style="stroke-width:1;stroke:rgb(0,0,0);fill:none;"/>
+                <g transform="translate(56, 445)">
+                    <text x="0" y="0" style="font-family:Verdana;font-size:8px;fill:rgb(0,0,0);text-anchor:end;">3072</text>
+                </g>
+                <line x1="57" y1="441" x2="61" y2="441" style="stroke-width:1;stroke:rgb(0,0,0);fill:none;"/>
+                <g transform="translate(56, 406)">
+                    <text x="0" y="0" style="font-family:Verdana;font-size:8px;fill:rgb(0,0,0);text-anchor:end;">4096</text>
+                </g>
+                <line x1="57" y1="402" x2="61" y2="402" style="stroke-width:1;stroke:rgb(0,0,0);fill:none;"/>
+                <g transform="translate(56, 367)">
+                    <text x="0" y="0" style="font-family:Verdana;font-size:8px;fill:rgb(0,0,0);text-anchor:end;">5120</text>
+                </g>
+                <line x1="57" y1="363" x2="61" y2="363" style="stroke-width:1;stroke:rgb(0,0,0);fill:none;"/>
+                <g transform="translate(56, 327)">
+                    <text x="0" y="0" style="font-family:Verdana;font-size:8px;fill:rgb(0,0,0);text-anchor:end;">6144</text>
+                </g>
+                <line x1="57" y1="323" x2="61" y2="323" style="stroke-width:1;stroke:rgb(0,0,0);fill:none;"/>
+                <g transform="translate(56, 288)">
+                    <text x="0" y="0" style="font-family:Verdana;font-size:8px;fill:rgb(0,0,0);text-anchor:end;">7168</text>
+                </g>
+                <line x1="57" y1="284" x2="61" y2="284" style="stroke-width:1;stroke:rgb(0,0,0);fill:none;"/>
+                <g transform="translate(56, 249)">
+                    <text x="0" y="0" style="font-family:Verdana;font-size:8px;fill:rgb(0,0,0);text-anchor:end;">8192</text>
+                </g>
+                <line x1="57" y1="245" x2="61" y2="245" style="stroke-width:1;stroke:rgb(0,0,0);fill:none;"/>
+                <g transform="translate(56, 209)">
+                    <text x="0" y="0" style="font-family:Verdana;font-size:8px;fill:rgb(0,0,0);text-anchor:end;">9216</text>
+                </g>
+                <line x1="57" y1="205" x2="61" y2="205" style="stroke-width:1;stroke:rgb(0,0,0);fill:none;"/>
+                <g transform="translate(56, 170)">
+                    <text x="0" y="0" style="font-family:Verdana;font-size:8px;fill:rgb(0,0,0);text-anchor:end;">10240</text>
+                </g>
+                <line x1="57" y1="166" x2="61" y2="166" style="stroke-width:1;stroke:rgb(0,0,0);fill:none;"/>
+                <g transform="translate(56, 131)">
+                    <text x="0" y="0" style="font-family:Verdana;font-size:8px;fill:rgb(0,0,0);text-anchor:end;">11264</text>
+                </g>
+                <line x1="57" y1="127" x2="61" y2="127" style="stroke-width:1;stroke:rgb(0,0,0);fill:none;"/>
+                <g transform="translate(56, 91)">
+                    <text x="0" y="0" style="font-family:Verdana;font-size:8px;fill:rgb(0,0,0);text-anchor:end;">12288</text>
+                </g>
+                <line x1="57" y1="87" x2="61" y2="87" style="stroke-width:1;stroke:rgb(0,0,0);fill:none;"/>
+                <g transform="translate(56, 52)">
+                    <text x="0" y="0" style="font-family:Verdana;font-size:8px;fill:rgb(0,0,0);text-anchor:end;">13312</text>
+                </g>
+                <line x1="57" y1="48" x2="61" y2="48" style="stroke-width:1;stroke:rgb(0,0,0);fill:none;"/>
+                <g transform="translate(56, 14)">
+                    <text x="0" y="0" style="font-family:Verdana;font-size:8px;fill:rgb(0,0,0);text-anchor:end;">14336</text>
+                </g>
+                <line x1="57" y1="10" x2="61" y2="10" style="stroke-width:1;stroke:rgb(0,0,0);fill:none;"/>
+            </g>
+        </g>
+        <g id="image_graph_axis81">
+            <line x1="1157" y1="560" x2="1157" y2="10" style="stroke-width:1;stroke:rgb(0,0,0);fill:none;"/>
+            <g transform="translate(1189, 285)">
+                <text x="0" y="0" transform="rotate(90)" style="font-family:Verdana;font-size:8px;fill:rgb(0,0,0);text-anchor:middle;">Stack level</text>
+            </g>
+            <g id="image_graph_axis_ticks82">
+                <g transform="translate(1160, 490)">
+                    <text x="0" y="0" style="font-family:Verdana;font-size:8px;fill:rgb(0,0,0);">2</text>
+                </g>
+                <line x1="1159" y1="486" x2="1155" y2="486" style="stroke-width:1;stroke:rgb(0,0,0);fill:none;"/>
+                <g transform="translate(1160, 417)">
+                    <text x="0" y="0" style="font-family:Verdana;font-size:8px;fill:rgb(0,0,0);">4</text>
+                </g>
+                <line x1="1159" y1="413" x2="1155" y2="413" style="stroke-width:1;stroke:rgb(0,0,0);fill:none;"/>
+                <g transform="translate(1160, 343)">
+                    <text x="0" y="0" style="font-family:Verdana;font-size:8px;fill:rgb(0,0,0);">6</text>
+                </g>
+                <line x1="1159" y1="339" x2="1155" y2="339" style="stroke-width:1;stroke:rgb(0,0,0);fill:none;"/>
+                <g transform="translate(1160, 270)">
+                    <text x="0" y="0" style="font-family:Verdana;font-size:8px;fill:rgb(0,0,0);">8</text>
+                </g>
+                <line x1="1159" y1="266" x2="1155" y2="266" style="stroke-width:1;stroke:rgb(0,0,0);fill:none;"/>
+                <g transform="translate(1160, 196)">
+                    <text x="0" y="0" style="font-family:Verdana;font-size:8px;fill:rgb(0,0,0);">10</text>
+                </g>
+                <line x1="1159" y1="192" x2="1155" y2="192" style="stroke-width:1;stroke:rgb(0,0,0);fill:none;"/>
+                <g transform="translate(1160, 123)">
+                    <text x="0" y="0" style="font-family:Verdana;font-size:8px;fill:rgb(0,0,0);">12</text>
+                </g>
+                <line x1="1159" y1="119" x2="1155" y2="119" style="stroke-width:1;stroke:rgb(0,0,0);fill:none;"/>
+                <g transform="translate(1160, 49)">
+                    <text x="0" y="0" style="font-family:Verdana;font-size:8px;fill:rgb(0,0,0);">14</text>
+                </g>
+                <line x1="1159" y1="45" x2="1155" y2="45" style="stroke-width:1;stroke:rgb(0,0,0);fill:none;"/>
+            </g>
+        </g>
+    </g>
+</svg>
