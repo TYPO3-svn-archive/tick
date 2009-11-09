@@ -129,8 +129,12 @@ class ux_t3lib_timeTrack extends t3lib_timeTrack {
 		
 		$messageTypeColors_default = 'black@0.3';
 		$messageTypeColors = array(
-			'2' => 'orange@0.3',
-			'3' => 'red@0.3'
+			'-1' => 'green@0.3',		// sysLog: -, devLog: OK
+			'0' => 'black@0.3', 	// Info
+			'1' => 'black@0.3', 	// Notice
+			'2' => 'orange@0.3', 	// Warning
+			'3' => 'red@0.3', 		// sysLog: Error, devLog: Fatal Error
+			'4' => 'red@0.3' 		// sysLog: Fatal Error, devLog: -
 		);
 		
 		$internalStack = array();
