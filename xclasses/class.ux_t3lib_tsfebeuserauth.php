@@ -26,10 +26,9 @@ class ux_t3lib_tsfeBeUserAuth extends t3lib_tsfeBeUserAuth {
 			$graph = $this->extFw('<a href="'.$fileName.'">Download svg file</a><br />');
 			$graph .= '<embed src="' . $GLOBALS['TT']->getTickFileName() . '" width=' . $GLOBALS['TT']->getTickConfig('svgWidth') . ' height=' . $GLOBALS['TT']->getTickConfig('svgHeight') . ' type="image/svg+xml">';
 			
-			$out.= 	'<tr>
-					<td><img src="clear.gif" width="50" height="1" alt="" /></td>
-					<td colspan="3">'.$graph.'</td>
-				</tr>';
+			$out.= 	'<tr><td colspan="4">'.$graph.'</td></tr>';
+			
+			
 		}
 		return $out;
 	}
