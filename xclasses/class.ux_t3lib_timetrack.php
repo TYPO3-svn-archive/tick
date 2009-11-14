@@ -147,7 +147,7 @@ class ux_t3lib_timeTrack extends t3lib_timeTrack {
 		$Graph->setFont($Font);
 
 		$Plotarea = $Graph->addNew('plotarea', array('Image_Graph_Axis'));
-		$Plotarea->setFillColor('white'); 
+		// $Plotarea->setFillColor('white'); 
 		
 		$memoryDataset = Image_Graph::factory('dataset');
 		
@@ -314,6 +314,12 @@ class ux_t3lib_timeTrack extends t3lib_timeTrack {
 			));	
 			$y += 15;
 		}
+		
+		$Legend = $Plotarea->addNew('Image_Graph_Layout');
+		$Legend->setFillColor('white@0.7');
+		$Legend->setFontSize(8);
+		$Legend->showShadow();
+				
 		
 		$this->tickFileName = str_replace('###TIMESTAMP###', time(), $this->getTickConfig('svgFilePath'));
 		$Graph->done(array('filename' => PATH_site . $this->tickFileName));
