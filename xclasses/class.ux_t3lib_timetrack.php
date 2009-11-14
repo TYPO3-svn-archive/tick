@@ -29,6 +29,18 @@ class ux_t3lib_timeTrack extends t3lib_timeTrack {
 	protected $tick_logData = array();
 	
 	/**
+	 * @var Image_Graph
+	 */
+	protected $graph = NULL;
+	
+	/**
+	 * @var array
+	 */
+	protected $tickConfig = NULL;
+	
+	protected $tickFileName = NULL;
+	
+	/**
 	 * Extending the start method to initialize ticking
 	 * 
 	 * @param void
@@ -91,6 +103,18 @@ class ux_t3lib_timeTrack extends t3lib_timeTrack {
 	}
 	*/
 	
+	public function getTickConfig($value=NULL) {
+		if (empty($this->tickConfig)) {
+			require(PATH_typo3conf.'localconf.php');
+			$this->tickConfig = unserialize($TYPO3_CONF_VARS['EXT']['extConf']['tick']);	
+		}
+		if (is_null($value)) {
+			return $this->tickConfig;
+		} else {
+			return $this->tickConfig[$value];
+		}
+	}
+	
 	/**
 	 * Class destructor
 	 * The sg is generated here
@@ -98,17 +122,23 @@ class ux_t3lib_timeTrack extends t3lib_timeTrack {
 	 * @param void
 	 * @return void
 	 */
-	public function __destruct() {
-		unregister_tick_function('tick');
+	public function getGraph() {
 		
-		require(PATH_typo3conf.'localconf.php');
-		$conf = unserialize($TYPO3_CONF_VARS['EXT']['extConf']['tick']);
+		if (!is_null($this->graph)) {
+			return $this->graph;
+		}
+		
+		unregister_tick_function('tick');
 		
 		// drawing the graph
 		require_once 'Image/Graph.php';
 
 		/* @var Graph Image_Graph */
-		$Graph = Image_Graph::factory('graph', array(array('width' => $conf['svgWidth'], 'height' => $conf['svgHeight'], 'canvas' => 'svg')));
+		$Graph = Image_Graph::factory('graph', array(array(
+			'width' => $this->getTickConfig('svgWidth'), 
+			'height' => $this->getTickConfig('svgHeight'), 
+			'canvas' => 'svg'
+		)));
 
 		
 		/* @var $Font Image_Graph_Font */
@@ -117,6 +147,7 @@ class ux_t3lib_timeTrack extends t3lib_timeTrack {
 		$Graph->setFont($Font);
 
 		$Plotarea = $Graph->addNew('plotarea', array('Image_Graph_Axis'));
+		$Plotarea->setFillColor('white'); 
 		
 		$memoryDataset = Image_Graph::factory('dataset');
 		
@@ -284,9 +315,19 @@ class ux_t3lib_timeTrack extends t3lib_timeTrack {
 			$y += 15;
 		}
 		
-		$filename = str_replace('###TIMESTAMP###', time(), $conf['svgFilePath']);
-		
-		$Graph->done(array('filename' => PATH_site . $filename));
+		$this->tickFileName = str_replace('###TIMESTAMP###', time(), $this->getTickConfig('svgFilePath'));
+		$Graph->done(array('filename' => PATH_site . $this->tickFileName));
+
+		$this->graph = $Graph;
+		return $this->graph; 
+	}
+	
+	public function getTickFileName() {
+		return $this->tickFileName;
+	}
+	
+	public function __destruct() {
+		$this->getGraph();
 	}
 	
 }
