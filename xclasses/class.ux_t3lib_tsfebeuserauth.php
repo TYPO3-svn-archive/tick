@@ -2,8 +2,8 @@
 
 class ux_t3lib_tsfeBeUserAuth extends t3lib_tsfeBeUserAuth {
 	
-	public function extPrintFeAdminDialog() {
-		$adminPanel = parent::extPrintFeAdminDialog();
+	public function displayAdminPanel() {
+		$adminPanel = parent::displayAdminPanel();
 		if ($this->uc['TSFE_adminConfig']['display_top']) {
 			$performance = $this->extGetCategory_performance();
 			$adminPanel = str_replace('</table>'.chr(10).'</form>', $performance.'</table>'.chr(10).'</form>', $adminPanel);
@@ -19,7 +19,7 @@ class ux_t3lib_tsfeBeUserAuth extends t3lib_tsfeBeUserAuth {
 	 * @see extPrintFeAdminDialog()
 	 */
 	public function extGetCategory_performance($out='')	{
-		$out.= $this->extGetHead('performance');
+		$out .= $this->extGetHead('performance');
 		if ($this->uc['TSFE_adminConfig']['display_performance']) {
 			$GLOBALS['TT']->getGraph();
 			$fileName = $GLOBALS['TT']->getTickFileName();
@@ -27,8 +27,6 @@ class ux_t3lib_tsfeBeUserAuth extends t3lib_tsfeBeUserAuth {
 			$graph .= '<embed src="' . $GLOBALS['TT']->getTickFileName() . '" width=' . $GLOBALS['TT']->getTickConfig('svgWidth') . ' height=' . $GLOBALS['TT']->getTickConfig('svgHeight') . ' type="image/svg+xml">';
 			
 			$out.= 	'<tr><td colspan="4">'.$graph.'</td></tr>';
-			
-			
 		}
 		return $out;
 	}

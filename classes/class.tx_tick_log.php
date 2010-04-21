@@ -1,11 +1,25 @@
 <?php
 
+/**
+ * Class providing handler methods for syslog and devlog
+ * 
+ * @author Fabrizio Branca <mail@fabrizio-branca.de>
+ */
 class tx_tick_log {
 	
+	/**
+	 * @var int min syslog log level
+	 */
 	public static $minSysLogSeverity;
 	
+	/**
+	 * @var int min devlog log level
+	 */
 	public static $minDevLogSeverity;
 	
+	/**
+	 * @var array labels
+	 */
 	public static $labels = array(
 		'-1' => 'OK',
 	    '0' => 'Info',

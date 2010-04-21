@@ -28,6 +28,9 @@ svgHeight = 600
 # cat=basic//; type=string; label=SVG ouput filename and path: Relative to PATH_site. ###TIMESTAMP### will be replaced by the current timestamp.
 svgFilePath = typo3temp/output.svg
 
+# cat=basic//; type=string; label=CSV ouput filename and path: Relative to PATH_site. ###TIMESTAMP### will be replaced by the current timestamp.
+csvFilePath = typo3temp/output.csv
+
 # cat=basic; type=int; label=Min sysLog severity: Mininum sysLog severity of messages that should appear in the graph. Severities: INFO = 0, NOTICE = 1, WARNING = 2, ERROR = 3, FATAL = 4. 
 minSysLogSeverity = 2 
 

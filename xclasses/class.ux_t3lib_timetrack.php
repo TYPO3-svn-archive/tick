@@ -1,5 +1,6 @@
 <?php
 
+require_once(PATH_t3lib.'class.t3lib_div.php');
 require_once(PATH_t3lib.'class.t3lib_timetrack.php');
 
 /**
@@ -11,8 +12,8 @@ require_once(PATH_t3lib.'class.t3lib_timetrack.php');
  * @param int (optional) message type
  * @return void
  */
-function tick($str='', $level='', $sqlQuery=false, $messageType=0) {
-	$GLOBALS['TT']->tick($str, $level, $sqlQuery, $messageType);
+function tick($str='', $level='', $sqlQuery=false, $messageType=0, $table='', $trace='') {
+	$GLOBALS['TT']->tick($str, $level, $sqlQuery, $messageType, $table, $trace);
 }
 
 
@@ -38,7 +39,15 @@ class ux_t3lib_timeTrack extends t3lib_timeTrack {
 	 */
 	protected $tickConfig = NULL;
 	
+	/**
+	 * @var string file name of the svg graph
+	 */
 	protected $tickFileName = NULL;
+	
+	/**
+	 * @var string file name of the csv file
+	 */
+	protected $csvFileName = NULL;
 	
 	/**
 	 * Extending the start method to initialize ticking
@@ -50,7 +59,7 @@ class ux_t3lib_timeTrack extends t3lib_timeTrack {
 		$this->tick_startMemoryUsage = memory_get_usage();
 		
 		register_tick_function('tick');
-		declare(ticks = 50);
+		declare(ticks = 10000);
 		
 		parent::start();
 	}
@@ -64,14 +73,16 @@ class ux_t3lib_timeTrack extends t3lib_timeTrack {
 	 * @param int (optional) message type
 	 * @return void
 	 */
-	public function tick($str='', $level='', $sqlQuery=false, $messageType=0) {
+	public function tick($str='', $level='', $sqlQuery=false, $messageType=0, $table='', $trace='') {
 		$this->tick_logData[] = array(
-			/* 'time' 	   => */ $this->mtime(), 
+			/* 'time' 	   => */ $this->getDifferenceToStarttime(),
 			/* 'memory'    => */ round((memory_get_usage() - $this->tick_startMemoryUsage) / 1024),
-			/* 'message'   => */ htmlentities($str),
+			/* 'message'   => */ $str,
 			/* 'level'     => */ $level,
 			/* 'querytype' => */ $sqlQuery,
-			/* 'msg_type'  => */ $messageType
+			/* 'msg_type'  => */ $messageType,
+			/* 'table'	   => */ $table,
+			/* 'trace'	   => */ $trace
 		);
 	}
 	
@@ -115,6 +126,37 @@ class ux_t3lib_timeTrack extends t3lib_timeTrack {
 		}
 	}
 	
+	public function xmlClean($strin) {
+		$strout = null;
+	
+		for ($i = 0; $i < strlen($strin); $i++) {
+			$ord = ord($strin[$i]);
+	
+			if (($ord > 0 && $ord < 32) || ($ord >= 127)) {
+					$strout .= "&amp;#{$ord};";
+			} else {
+				switch ($strin[$i]) {
+					case '<':
+							$strout .= '&lt;';
+							break;
+					case '>':
+							$strout .= '&gt;';
+							break;
+					case '&':
+							$strout .= '&amp;';
+							break;
+					case '"':
+							$strout .= '&quot;';
+							break;
+					default:
+							$strout .= $strin[$i];
+				}
+			}
+		}
+	
+		return $strout;
+	}
+	
 	/**
 	 * Class destructor
 	 * The sg is generated here
@@ -122,13 +164,11 @@ class ux_t3lib_timeTrack extends t3lib_timeTrack {
 	 * @param void
 	 * @return void
 	 */
-	public function getGraph() {
+	public function getGraph($fileName) {
 		
 		if (!is_null($this->graph)) {
 			return $this->graph;
 		}
-		
-		unregister_tick_function('tick');
 		
 		// drawing the graph
 		require_once 'Image/Graph.php';
@@ -185,7 +225,7 @@ class ux_t3lib_timeTrack extends t3lib_timeTrack {
 			$memoryDataset->addPoint($data[0], $data[1]);
 				
 			// add database operation area
-			if (!empty($data[4])) {
+			if (!empty($data[4])) { /* $data[4] is the querytype */
 				list($dbOperation, $position) = explode('_', $data[4]);
 				if (!is_array($internalStack[$dbOperation])) {
 					$internalStack[$dbOperation] = array();
@@ -197,27 +237,40 @@ class ux_t3lib_timeTrack extends t3lib_timeTrack {
 					// get begin from stack
 					$beginData = array_pop($internalStack[$dbOperation]);
 					
+					$duration = $data[0]-$beginData[0];
+					
 					// collect some statistics
 					$dbOperationCount[$dbOperation]++;
-					$dbOperationDuration[$dbOperation] += ($data[0]-$beginData[0]);
-										
+					$dbOperationDuration[$dbOperation] += $duration;
+					
+					$title = $beginData[2];
+					$title = substr($title, 0, 1024);
+					$title = $this->xmlClean($title);
+					
+					// add database operation to graph
 					$db[$key] = new tx_tick_customMarker();
 					$Plotarea->add($db[$key]);
 					$db[$key]->addVertex(array('X' => $beginData[0], 'Y' => $beginData[1]-$thickness));
 					$db[$key]->addVertex(array('X' => $beginData[0], 'Y' => $beginData[1]+$thickness));
 					$db[$key]->addVertex(array('X' => $data[0], 'Y' => $data[1]+$thickness));
 					$db[$key]->addVertex(array('X' => $data[0], 'Y' => $data[1]-$thickness));
-					$db[$key]->setMarkerTitle($beginData[2]);
+					$db[$key]->setMarkerTitle($title);
 					$db[$key]->setFillColor($dbOperationColors[$dbOperation].'@0.5');
+					
 				}
 			}
 			
 			// add vertical marker with message
 			if (!empty($data[2]) && empty($data[4])) {
+				
+				$title = $data[2];
+				$title = substr($title, 0, 1024);
+				$title = $this->xmlClean($title);
+				
 				$myCaptionLine[$key] = new tx_tick_captionLine();
 				$Plotarea->add($myCaptionLine[$key], IMAGE_GRAPH_AXIS_X);
 				$myCaptionLine[$key]->setValue($data[0]);
-				$myCaptionLine[$key]->setMarkerTitle($data[2]);
+				$myCaptionLine[$key]->setMarkerTitle($title);
 				$myCaptionLine[$key]->setLineStyle($MarkerLineStyle);
 				$color = array_key_exists($data[5], $messageTypeColors) ? $messageTypeColors[$data[5]] : $messageTypeColors_default;
 				$myCaptionLine[$key]->setLineColor($color);
@@ -254,8 +307,6 @@ class ux_t3lib_timeTrack extends t3lib_timeTrack {
 		}
 			
 		// setting up the lines
-		
-		
 		
 		/* @var $memory Image_Graph_Plot_Line */
 		$memory = $Plotarea->addNew('line', array($memoryDataset), IMAGE_GRAPH_AXIS_Y);
@@ -319,13 +370,59 @@ class ux_t3lib_timeTrack extends t3lib_timeTrack {
 		$Legend->setFillColor('white@0.7');
 		$Legend->setFontSize(8);
 		$Legend->showShadow();
-				
 		
-		$this->tickFileName = str_replace('###TIMESTAMP###', time(), $this->getTickConfig('svgFilePath'));
-		$Graph->done(array('filename' => PATH_site . $this->tickFileName));
+		$Graph->done(array('filename' => $fileName));
 
 		$this->graph = $Graph;
 		return $this->graph; 
+	}
+	
+	
+	/**
+	 * Create csv file
+	 *
+	 * @param string filename
+	 */
+	public function writeCsv($fileName) {
+		$internalStack = array();
+		
+		$fp_csv = fopen($fileName, 'w');
+		
+		// loop over collected data
+		foreach ($this->tick_logData as $key => $data) {
+		
+			// add database operation area
+			if (!empty($data[4])) { /* $data[4] is the querytype */
+				list($dbOperation, $position) = explode('_', $data[4]);
+				if (!is_array($internalStack[$dbOperation])) {
+					$internalStack[$dbOperation] = array();
+				}
+				if ($position == 'begin') {
+					// store on stack
+					array_push($internalStack[$dbOperation], $data);
+				} elseif ($position == 'end') {
+					// get begin from stack
+					$beginData = array_pop($internalStack[$dbOperation]);
+					
+					$duration = $data[0]-$beginData[0];
+					
+					// add database operation to csv file
+					if ($fp_csv) {
+						fputcsv($fp_csv, array(
+							$duration,
+							$beginData[6], /* table */
+							$dbOperation,
+							str_replace(chr(10), ' ', $beginData[2]), /* sql query */
+							implode(' \\ ', array_reverse(array_slice(explode(' // ', $beginData[7]), -5, 4))), /* trace */
+						), ';', '"');
+					}
+				}
+			}
+		}
+		
+		if ($fp_csv) {
+			fclose($fp_csv);
+		}
 	}
 	
 	public function getTickFileName() {
@@ -333,7 +430,17 @@ class ux_t3lib_timeTrack extends t3lib_timeTrack {
 	}
 	
 	public function __destruct() {
-		$this->getGraph();
+		unregister_tick_function('tick');
+		
+		$csvfileName = str_replace('###TIMESTAMP###', time(), $this->getTickConfig('csvFilePath'));
+		if ($csvfileName) {
+			$this->writeCsv(PATH_site . $csvfileName);
+		}
+		
+		$this->tickFileName = str_replace('###TIMESTAMP###', time(), $this->getTickConfig('svgFilePath'));
+		if ($this->tickFileName) {
+			$this->getGraph(PATH_site . $this->tickFileName);
+		}
 	}
 	
 }

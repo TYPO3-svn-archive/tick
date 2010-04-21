@@ -5,6 +5,54 @@
  */
 class ux_t3lib_DB extends t3lib_DB {
 	
+	public $trace = true;
+	
+	/**
+	 * Displays the "path" of the function call stack in a string, using debug_backtrace
+	 *
+	 * @return	string
+	 */
+	public static function debug_trail()	{
+		$trail = debug_backtrace();
+		$trail = array_reverse($trail);
+		array_pop($trail);
+
+		$path = array();
+		foreach($trail as $dat)	{
+			
+			if (isset($dat['args']) && is_array($dat['args'])) {
+				$arguments = self::argumentArrayToString($dat['args']);
+				$arguments = '('.$arguments.')';
+			}
+			$path[] = $dat['class'].$dat['type'].$dat['function'].$arguments.'#'.$dat['line'];
+		}
+
+		return implode(' // ',$path);
+	}
+	
+	public static function argumentArrayToString(array $arguments, $depth=0) {
+		$tmpArray = array();
+		foreach ($arguments as $argument) {
+			if (is_object($argument)) {
+				$tmpArray[] = get_class($argument);
+			} elseif (is_string($argument)) {
+				$tmp = (strlen($argument) < 200) ? $argument : (substr($argument, 0, 20) . '...' . substr($argument, -20));
+				$tmp = str_replace("\n", '[break]', $tmp);
+				$tmp = "'".$tmp."'";
+				$tmpArray[] = $tmp;
+			} elseif (is_numeric($argument)) {
+				$tmpArray[] = (string)$argument;
+			} elseif (is_bool($argument)) {
+				$tmpArray[] = $argument ? 'true' : 'false';
+			} elseif (is_array($argument) && ($depth < 2)) {
+				$tmpArray[] = '['.self::argumentArrayToString($argument, $depth+1).']';
+			} else {
+				$tmpArray[] = gettype($argument);
+			}
+		}
+		return implode(', ', $tmpArray);
+	}
+	
 	/**
 	 * Creates and executes an INSERT SQL-statement for $table from the array with field/value pairs $fields_values.
 	 * Using this function specifically allows us to handle BLOB and CLOB fields depending on DB
@@ -17,9 +65,9 @@ class ux_t3lib_DB extends t3lib_DB {
 	 */
 	function exec_INSERTquery($table,$fields_values,$no_quote_fields=FALSE)	{
 		$query = $this->INSERTquery($table,$fields_values,$no_quote_fields);
-		if (function_exists('tick'))tick($query, '', 'insert_begin');
+		if (function_exists('tick')) tick($query, '', 'insert_begin', 0, $table, $this->trace ? self::debug_trail() : '');
 		$res = mysql_query($query, $this->link);
-		if (function_exists('tick'))tick('', '', 'insert_end');
+		if (function_exists('tick')) tick('', '', 'insert_end');
 		if ($this->debugOutput)	$this->debug('exec_INSERTquery');
 		return $res;
 	}
@@ -37,9 +85,9 @@ class ux_t3lib_DB extends t3lib_DB {
 	 */
 	function exec_UPDATEquery($table,$where,$fields_values,$no_quote_fields=FALSE)	{
 		$query = $this->UPDATEquery($table,$where,$fields_values,$no_quote_fields);
-		if (function_exists('tick'))tick($query, '', 'update_begin');
+		if (function_exists('tick')) tick($query, '', 'update_begin', 0, $table, $this->trace ? self::debug_trail() : '');
 		$res = mysql_query($query, $this->link);
-		if (function_exists('tick'))tick('', '', 'update_end');
+		if (function_exists('tick')) tick('', '', 'update_end');
 		if ($this->debugOutput)	$this->debug('exec_UPDATEquery');
 		return $res;
 	}
@@ -54,9 +102,9 @@ class ux_t3lib_DB extends t3lib_DB {
 	 */
 	function exec_DELETEquery($table,$where)	{
 		$query = $this->DELETEquery($table,$where);
-		if (function_exists('tick'))tick($query, '', 'delete_begin');
+		if (function_exists('tick')) tick($query, '', 'delete_begin', 0, $table, $this->trace ? self::debug_trail() : '');
 		$res = mysql_query($query, $this->link);
-		if (function_exists('tick'))tick('', '', 'delete_end');
+		if (function_exists('tick')) tick('', '', 'delete_end');
 		if ($this->debugOutput)	$this->debug('exec_DELETEquery');
 		return $res;
 	}
@@ -76,7 +124,7 @@ class ux_t3lib_DB extends t3lib_DB {
 	 */
 	function exec_SELECTquery($select_fields,$from_table,$where_clause,$groupBy='',$orderBy='',$limit='')	{
 		$query = $this->SELECTquery($select_fields,$from_table,$where_clause,$groupBy,$orderBy,$limit);
-		if (function_exists('tick')) tick($query, '', 'select_begin');
+		if (function_exists('tick')) tick($query, '', 'select_begin', 0, $from_table, $this->trace ? self::debug_trail() : '');
 		$res = mysql_query($query, $this->link);
 		if (function_exists('tick')) tick('', '', 'select_end');
 
