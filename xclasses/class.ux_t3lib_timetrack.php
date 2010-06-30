@@ -126,16 +126,22 @@ class ux_t3lib_timeTrack extends t3lib_timeTrack {
 		}
 	}
 	
-	public function xmlClean($strin) {
+	/**
+	 * Clean xml string
+	 * 
+	 * @param string $string
+	 * @return string cleaned xml string
+	 */
+	public function xmlClean($string) {
 		$strout = null;
 	
-		for ($i = 0; $i < strlen($strin); $i++) {
-			$ord = ord($strin[$i]);
+		for ($i = 0; $i < strlen($string); $i++) {
+			$ord = ord($string[$i]);
 	
 			if (($ord > 0 && $ord < 32) || ($ord >= 127)) {
 					$strout .= "&amp;#{$ord};";
 			} else {
-				switch ($strin[$i]) {
+				switch ($string[$i]) {
 					case '<':
 							$strout .= '&lt;';
 							break;
@@ -149,7 +155,7 @@ class ux_t3lib_timeTrack extends t3lib_timeTrack {
 							$strout .= '&quot;';
 							break;
 					default:
-							$strout .= $strin[$i];
+							$strout .= $string[$i];
 				}
 			}
 		}
