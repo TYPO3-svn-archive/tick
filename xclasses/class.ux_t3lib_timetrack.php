@@ -59,7 +59,14 @@ class ux_t3lib_timeTrack extends t3lib_timeTrack {
 		$this->tick_startMemoryUsage = memory_get_usage();
 		
 		register_tick_function('tick');
-		declare(ticks = 10000);
+
+		// declare does not allow any variables, so this is the workaround...
+		switch ($this->getTickConfig('tickResolution')) {
+			case '100' : declare(ticks = 100); break;
+			case '1000' : declare(ticks = 1000); break;
+			case '10000' : declare(ticks = 10000); break;
+			default : declare(ticks = 1000); break;
+		}
 		
 		parent::start();
 	}
@@ -105,15 +112,11 @@ class ux_t3lib_timeTrack extends t3lib_timeTrack {
 	}
 	
 	/**
-	 * Overridden method
+	 * Get extension manager configuration
+	 * 
+	 * @param string value (optional) if not set the whole configuration will be returned, otherwise only the requested key
+	 * @return array|string whole configuration or single value
 	 */
-	/*
-	public function pull($content='')  {
-		$this->tick('', $this->tsStackLevel . '_end');
-		parent::pull($content);
-	}
-	*/
-	
 	public function getTickConfig($value=NULL) {
 		if (empty($this->tickConfig)) {
 			require(PATH_typo3conf.'localconf.php');
@@ -179,16 +182,14 @@ class ux_t3lib_timeTrack extends t3lib_timeTrack {
 		// drawing the graph
 		require_once 'Image/Graph.php';
 
-		/* @var Graph Image_Graph */
+		
 		$Graph = Image_Graph::factory('graph', array(array(
 			'width' => $this->getTickConfig('svgWidth'), 
 			'height' => $this->getTickConfig('svgHeight'), 
 			'canvas' => 'svg'
-		)));
+		))); /* @var Graph Image_Graph */
 
-		
-		/* @var $Font Image_Graph_Font */
-		$Font = $Graph->addNew('font', 'Verdana'); 
+		$Font = $Graph->addNew('font', 'Verdana'); /* @var $Font Image_Graph_Font */ 
 		$Font->setSize(10);
 		$Graph->setFont($Font);
 
@@ -289,13 +290,12 @@ class ux_t3lib_timeTrack extends t3lib_timeTrack {
 		
 		// adding tslog stack trace
 		
-		/* @var $Fill Image_Graph_Fill_Gradient */
-		$Fill = Image_Graph::factory('gradient', array(IMAGE_GRAPH_GRAD_HORIZONTAL, 'green@0.2', 'green@0.5'));
+		$Fill = Image_Graph::factory('gradient', array(IMAGE_GRAPH_GRAD_HORIZONTAL, 'green@0.2', 'green@0.5')); /* @var $Fill Image_Graph_Fill_Gradient */
 		$StackLineStyle = Image_Graph::factory('Image_Graph_Line_Solid', array('green@0.9'));
 		$StackLineStyle->setThickness(0.1);
 		foreach($tsStackLogCopy as $uniqueId => $data) {
-			$tsStackLogCopy[$uniqueId]['endtime'] = $this->convertMicrotime($tsStackLogCopy[$uniqueId]['endtime'])-$this->starttime;
-			$tsStackLogCopy[$uniqueId]['starttime'] = $this->convertMicrotime($tsStackLogCopy[$uniqueId]['starttime'])-$this->starttime;
+			$tsStackLogCopy[$uniqueId]['endtime'] = $this->getMilliseconds($tsStackLogCopy[$uniqueId]['endtime'])-$this->starttime;
+			$tsStackLogCopy[$uniqueId]['starttime'] = $this->getMilliseconds($tsStackLogCopy[$uniqueId]['starttime'])-$this->starttime;
 			$tsStackLogCopy[$uniqueId]['deltatime'] = $tsStackLogCopy[$uniqueId]['endtime']-$tsStackLogCopy[$uniqueId]['starttime'];
 			$tsStackLogCopy[$uniqueId]['key'] = implode($tsStackLogCopy[$uniqueId]['stackPointer']?'.':'/', end($data['tsStack']));
 
@@ -314,8 +314,7 @@ class ux_t3lib_timeTrack extends t3lib_timeTrack {
 			
 		// setting up the lines
 		
-		/* @var $memory Image_Graph_Plot_Line */
-		$memory = $Plotarea->addNew('line', array($memoryDataset), IMAGE_GRAPH_AXIS_Y);
+		$memory = $Plotarea->addNew('line', array($memoryDataset), IMAGE_GRAPH_AXIS_Y); /* @var $memory Image_Graph_Plot_Line */
 		$LineStyle = Image_Graph::factory('Image_Graph_Line_Solid', array('blue'));
 		$LineStyle->setThickness(1.5);
 		$memory->setLineStyle($LineStyle);
@@ -333,8 +332,8 @@ class ux_t3lib_timeTrack extends t3lib_timeTrack {
 		$yAxisSecond->forceMaximum(15);
 		
 		// add more information
-		/* @var $canvas Image_Canvas_SVG */
-		$canvas = $Graph->_getCanvas();
+		
+		$canvas = $Graph->_getCanvas(); /* @var $canvas Image_Canvas_SVG */
 		
 		$info = array(
 			sprintf('Max. memory usage: %s kb', $memoryDataset->maximumY()),
@@ -383,7 +382,6 @@ class ux_t3lib_timeTrack extends t3lib_timeTrack {
 		return $this->graph; 
 	}
 	
-	
 	/**
 	 * Create csv file
 	 *
@@ -431,10 +429,20 @@ class ux_t3lib_timeTrack extends t3lib_timeTrack {
 		}
 	}
 	
+	/**
+	 * Get tick file name
+	 * 
+	 * @return string
+	 */
 	public function getTickFileName() {
 		return $this->tickFileName;
 	}
 	
+	/**
+	 * Destructor.
+	 * 
+	 * @return void
+	 */
 	public function __destruct() {
 		unregister_tick_function('tick');
 		

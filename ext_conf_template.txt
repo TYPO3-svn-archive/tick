@@ -36,3 +36,6 @@ minSysLogSeverity = 2
 
 # cat=basic; type=int; label=Min devLog severity: Mininum devLog severity of messages that should appear in the graph. Severities: OK=-1, INFO = 0, NOTICE = 1, WARNING = 2, FATAL ERROR = 3. 
 minDevLogSeverity = 2 
+
+# cat=basic; type=options[100,1000,10000]; label=Tick resolution: Smaller number means more data, means higher resolution, but could also excess your memory limit.
+tickResolution = 1000
